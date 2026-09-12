@@ -17,6 +17,4 @@ This repository contains the source code for the web edition of *35 Poems*, a co
 - ✉️ **Feedback form** — a no-backend form that opens the reader's email client, pre-filled and addressed to the author.
 - ♿ **Accessibility touches** — ARIA labels, keyboard support (Escape to close the mobile menu), `prefers-reduced-motion` support, and semantic HTML.
 
----
 
-## 🗂️ Project Structure
