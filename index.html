@@ -91,7 +91,6 @@
       transition: background-color 0.3s ease;
     }
 
-    /* ---------- Layout Wrapper ---------- */
     .layout {
       display: flex;
       justify-content: center;
@@ -101,13 +100,11 @@
       margin: 0 auto;
     }
 
-    /* ---------- Hidden Inputs ---------- */
     #dark-toggle,
     #sidebar-toggle {
       display: none;
     }
 
-    /* ---------- Dark Mode Toggle ---------- */
     .toggle-label {
       position: fixed;
       top: 1.2rem;
@@ -147,7 +144,6 @@
       display: inline;
     }
 
-    /* ---------- Sidebar Toggle (mobile) ---------- */
     .sidebar-toggle-label {
       display: none;
       position: fixed;
@@ -174,7 +170,6 @@
       background: var(--book-subtle-bg);
     }
 
-    /* Overlay for mobile sidebar */
     .sidebar-overlay {
       display: none;
       position: fixed;
@@ -191,7 +186,6 @@
       opacity: 1;
     }
 
-    /* ---------- Sidebar ---------- */
     .sidebar {
       width: var(--sidebar-width);
       flex-shrink: 0;
@@ -277,7 +271,6 @@
       border-left-color: var(--book-accent);
     }
 
-    /* ---------- Book Container ---------- */
     .book {
       max-width: 750px;
       width: 100%;
@@ -291,7 +284,6 @@
       min-width: 0;
     }
 
-    /* ---------- Cover ---------- */
     .cover {
       text-align: center;
       padding: 1rem 0 2.5rem 0;
@@ -347,7 +339,6 @@
       padding-right: 1rem;
     }
 
-    /* ---------- Copyright ---------- */
     .copyright {
       font-size: 0.85rem;
       color: var(--book-muted);
@@ -357,7 +348,6 @@
       margin-bottom: 2rem;
     }
 
-    /* ---------- Foreword ---------- */
     .foreword {
       font-style: italic;
       background-color: var(--book-subtle-bg);
@@ -381,7 +371,6 @@
       color: var(--book-text);
     }
 
-    /* ---------- Table of Contents (in-book) ---------- */
     .toc {
       margin: 2.5rem 0 3rem;
       background: var(--book-toc-bg);
@@ -438,7 +427,6 @@
       border-bottom-color: var(--book-accent);
     }
 
-    /* ---------- Poem Sections ---------- */
     .part {
       margin-top: 3rem;
       text-align: center;
@@ -486,7 +474,6 @@
       transition: color 0.3s;
     }
 
-    /* ---------- About Author ---------- */
     .about-author {
       margin-top: 3.5rem;
       padding-top: 2rem;
@@ -509,7 +496,6 @@
       color: var(--book-text);
     }
 
-    /* ---------- Feedback Form ---------- */
     .feedback-section {
       margin-top: 3.5rem;
       padding-top: 2.5rem;
@@ -643,7 +629,6 @@
       font-style: italic;
     }
 
-    /* ---------- Back to Top ---------- */
     .back-to-top {
       display: block;
       text-align: center;
@@ -659,10 +644,6 @@
     .back-to-top:hover {
       color: var(--book-accent);
     }
-
-    /* ==========================================================
-       RESPONSIVE
-       ========================================================== */
 
     @media (max-width: 1100px) {
       :root {
@@ -865,28 +846,22 @@
   </style>
 </head>
 <body>
-  <!-- Hidden checkboxes for CSS-only toggles -->
   <input type="checkbox" id="dark-toggle" aria-label="Toggle dark mode">
   <input type="checkbox" id="sidebar-toggle" aria-label="Toggle sidebar">
 
-  <!-- Mobile sidebar overlay -->
   <label for="sidebar-toggle" class="sidebar-overlay" aria-hidden="true"></label>
 
-  <!-- Dark mode toggle -->
   <label for="dark-toggle" class="toggle-label" role="button" aria-pressed="false" title="Toggle dark mode">
     <span class="icon-moon" aria-hidden="true">🌙</span>
     <span class="icon-sun" aria-hidden="true">☀️</span>
   </label>
 
-  <!-- Sidebar toggle (mobile) -->
   <label for="sidebar-toggle" class="sidebar-toggle-label" role="button" aria-pressed="false" title="Toggle index">
     <span aria-hidden="true">☰</span>
   </label>
 
-  <!-- Main layout -->
   <div class="layout">
 
-    <!-- ============ SIDEBAR INDEX ============ -->
     <aside class="sidebar" id="top">
       <h3>Index</h3>
       <nav aria-label="Table of contents">
@@ -947,9 +922,7 @@
       </nav>
     </aside>
 
-    <!-- ============ BOOK ============ -->
     <div class="book">
-      <!-- Cover page -->
       <div class="cover" id="cover">
         <div class="moon-icon">☾</div>
         <div class="stars">✧ ✦ ✧</div>
@@ -958,7 +931,6 @@
         <div class="author">of<br>John Muconto</div>
       </div>
 
-      <!-- Copyright -->
       <div class="copyright">
         <p>© 2026 John Muconto</p>
         <p>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</p>
@@ -966,7 +938,6 @@
         <p>License details: Creative Commons BY-NC 4.0</p>
       </div>
 
-      <!-- Foreword -->
       <div class="foreword" id="foreword">
         <p><strong>FOREWORD</strong></p>
         <p>this collection began as a gift to myself—something I wanted to complete before turning 35.</p>
@@ -976,7 +947,6 @@
         <p>at 35, I do not claim resolution. only awareness.</p>
       </div>
 
-      <!-- Table of contents -->
       <div class="toc" id="toc">
         <h2>Contents</h2>
         <ul>
@@ -1030,15 +1000,23 @@
 
       <div class="poem">
         <div class="poem-title" id="live">Live</div>
-        <div class="poem-content">ike the first,  like the last day of your life  with the wonder  of a child discovering  the world,  and the gaze of an elder  reminiscing on old days
+        <div class="poem-content">Live today
+like the first,
+like the last day of your life
 
-Live today—  it may be the first,  it will be the last
+with the wonder
+of a child discovering
+the world,
+and the gaze of an elder
+reminiscing on old days
 
-Every day, life begins  where life ends:  a circle of life
+Live today—
+it may be the first,
+it will be the last
 
-Live
-
-Live today</div>
+Every day, life begins
+where life ends:
+a circle of life</div>
       </div>
 
       <div class="poem">
@@ -1051,20 +1029,22 @@ for the wrongs in the world and in my life
 
 for my own mistakes, my own sins
 
-even when I knew exactly what I was doing
-
-and everything happens at once,
-
-a slow day at home— waking up late, a cup of coffee—
-
-is all you ask for
-
-and then you know: you are an adult</div>
+even when I knew exactly what I was doing</div>
       </div>
 
       <div class="poem">
         <div class="poem-title" id="adulthood">Adulthood</div>
-        <div class="poem-content">When life moves too fast</div>
+        <div class="poem-content">When life moves too fast
+and everything happens at once,
+
+a slow day at home—
+waking up late,
+a cup of coffee—
+
+is all you ask for
+
+and then you know:
+you are an adult</div>
       </div>
 
       <div class="poem">
@@ -1129,34 +1109,35 @@ memories like this make me appreciate my mother and what I had</div>
 
       <div class="poem">
         <div class="poem-title" id="without-you">Without You</div>
-        <div class="poem-content">Silence screams in the space you left—
+        <div class="poem-content">Silence screams
+in the space you left—
 
-1 missed you
+louder
+than any noise
 
-until 20, I wanted friends
-
-until 30, I wanted happiness
-
-as I grow toward 40, I want peace of mind
-
-as I grew, I got what I wanted—and still reached for something deeper
-
-in my journey through life, I am no longer chasing—only understanding</div>
+I miss you</div>
       </div>
 
       <div class="poem">
         <div class="poem-title" id="growing-up">Growing Up</div>
-        <div class="poem-content">Until 10, I wanted things
+        <div class="poem-content">Until 10,
+I wanted things
 
-write readable code
+until 20,
+I wanted friends
 
-know when to use enums and interfaces
+until 30,
+I wanted happiness
 
-so much complexity— maybe I should go functional
+as I grow toward 40,
+I want peace of mind
 
-clean code or not, it just needs to work
+as I grew, I got what I wanted—
+and still reached for something deeper
 
-because if I come back in six months, I need to find that damn method</div>
+in my journey through life,
+I am no longer chasing—
+only understanding</div>
       </div>
 
       <!-- PART II - STRUGGLE -->
@@ -1166,9 +1147,24 @@ because if I come back in six months, I need to find that damn method</div>
 
       <div class="poem">
         <div class="poem-title" id="programmers-code">Programmer's Code</div>
-        <div class="poem-content">Between classes and objects, organize your code
+        <div class="poem-content">Between classes and objects,
+organize your code
 
-don't repeat yourself,</div>
+don't repeat yourself,
+write readable code
+
+know when to use
+enums and interfaces
+
+so much complexity—
+maybe I should go functional
+
+clean code or not,
+it just needs to work
+
+because if I come back in six months,
+I need to find
+that damn method</div>
       </div>
 
       <div class="poem">
@@ -1194,41 +1190,62 @@ I believe in love only love can unite us</div>
 
       <div class="poem">
         <div class="poem-title" id="pain">Pain</div>
-        <div class="poem-content">I feel your pain you are not alone I have been there before
+        <div class="poem-content">I feel your pain
+you are not alone
+I have been there before
 
-hopeless, in a pool of tears and sorrow
+hopeless,
+in a pool of tears and sorrow
 
-no matter what you are going through, you will survive it you are stronger than it
+no matter what you are going through,
+you will survive it
+you are stronger than it
 
-I have been there and I survived it
+I have been there
+and I survived it
 
-there is no pain we cannot endure and overcome
+there is no pain we cannot endure
+and overcome
 
-together we are stronger it is okay to ask for help</div>
+together we are stronger
+it is okay to ask for help</div>
       </div>
 
       <div class="poem">
         <div class="poem-title" id="erica">Erica</div>
-        <div class="poem-content">Since our first date, I knew you were the one
+        <div class="poem-content">Since our first date,
+I knew you were the one
 
 five years later,
-
 you are still the one
 
-I love you— deeply, more than before
-
-find people willing to pay, and make the world a better place
-
-But what can I do when the problem I want to solve is putting money in my pocket
-
-and escaping the nine to five
-
-is that a problem worth solving?</div>
+I love you—
+deeply,
+more than before</div>
       </div>
 
       <div class="poem">
         <div class="poem-title" id="startup-paradigm">Startup Paradigm</div>
-        <div class="poem-content">They say to build a startup, find a problem, create a solution,</div>
+        <div class="poem-content">They say
+to build a startup,
+find a problem,
+create a solution,
+
+find people willing to pay,
+and make the world
+a better place
+
+But what can I do
+when the problem
+I want to solve
+is putting money
+in my pocket
+
+and escaping
+the nine to five—
+
+is that a problem
+worth solving?</div>
       </div>
 
       <div class="poem">
@@ -1290,20 +1307,27 @@ letting go of myself— for something greater</div>
 
       <div class="poem">
         <div class="poem-title" id="parents">Parents</div>
-        <div class="poem-content">I know all you did, all you could, all you knew—
-
+        <div class="poem-content">I know
+all you did,
+all you could,
+all you knew—
 for me
 
-I love you very much
-
-the language of poets lets me find a part of me so deep it is only revealed through verse</div>
+I love you
+very much</div>
       </div>
 
       <div class="poem">
         <div class="poem-title" id="poem">Poem</div>
-        <div class="poem-content">I am not a poet, but something in me is
+        <div class="poem-content">I am not a poet,
+but something in me is
 
-my heart speaks in poems, things even I am not aware of</div>
+my heart speaks in poems,
+things even I am not aware of
+
+the language of poets
+lets me find a part of me so deep
+it is only revealed through verse</div>
       </div>
 
       <div class="poem">
@@ -1513,7 +1537,6 @@ I am here—blessed with love and pride
 a life well lived</div>
       </div>
 
-      <!-- About the Author -->
       <div class="about-author" id="about-author">
         <h2>About the Author</h2>
         <p>John Muconto is a programmer and writer from Mozambique with professional experience in IT management and a parallel academic background in theology. His work sits at the intersection of analytical systems thinking and reflective spiritual inquiry.</p>
@@ -1522,7 +1545,6 @@ a life well lived</div>
         <p>The work is published under a free license, reflecting his interest in open access and shared creative work.</p>
       </div>
 
-      <!-- Feedback Form -->
       <div class="feedback-section" id="feedback">
         <h2>Feedback</h2>
         <p class="feedback-subtitle">I would love to hear your thoughts on these poems.</p>
@@ -1566,9 +1588,6 @@ a life well lived</div>
     </div>
   </div>
 
-  <!-- ============================================================
-       SCROLL SPY — auto-highlights the current section in sidebar
-       ============================================================ -->
   <script>
     (function () {
       'use strict';
@@ -1577,14 +1596,12 @@ a life well lived</div>
       var sidebarLinks = sidebar ? Array.prototype.slice.call(sidebar.querySelectorAll('a[href^="#"]')) : [];
       if (!sidebarLinks.length) return;
 
-      // Map anchor id -> sidebar link
       var linkById = {};
       sidebarLinks.forEach(function (link) {
         var id = link.getAttribute('href').slice(1);
         if (id) linkById[id] = link;
       });
 
-      // Collect all elements that have an id referenced by the sidebar
       var targets = Object.keys(linkById)
         .map(function (id) { return document.getElementById(id); })
         .filter(Boolean);
@@ -1598,7 +1615,6 @@ a life well lived</div>
         if (currentActive) currentActive.classList.remove('active');
         if (link) {
           link.classList.add('active');
-          // Auto-scroll the sidebar so the active item stays visible
           var linkTop = link.offsetTop;
           var linkBottom = linkTop + link.offsetHeight;
           var sidebarTop = sidebar.scrollTop;
@@ -1612,9 +1628,8 @@ a life well lived</div>
         currentActive = link;
       }
 
-      // Find the target whose top is closest to (but above) a line near the viewport top
       function updateActive() {
-        var offsetLine = window.scrollY + 120; // trigger line
+        var offsetLine = window.scrollY + 120;
         var bestLink = null;
         var bestTop = -Infinity;
 
@@ -1626,7 +1641,6 @@ a life well lived</div>
           }
         });
 
-        // If we're above the first target, highlight nothing
         if (!bestLink) {
           setActive(null);
         } else {
@@ -1634,7 +1648,6 @@ a life well lived</div>
         }
       }
 
-      // Throttle with requestAnimationFrame for smoothness
       var ticking = false;
       function onScroll() {
         if (ticking) return;
@@ -1649,7 +1662,6 @@ a life well lived</div>
       window.addEventListener('resize', onScroll, { passive: true });
       updateActive();
 
-      // Close the mobile sidebar when a link is tapped
       var sidebarToggle = document.getElementById('sidebar-toggle');
       sidebarLinks.forEach(function (link) {
         link.addEventListener('click', function () {
@@ -1659,7 +1671,6 @@ a life well lived</div>
         });
       });
 
-      // Optional: close the mobile sidebar on Escape key
       document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && sidebarToggle && sidebarToggle.checked) {
           sidebarToggle.checked = false;
