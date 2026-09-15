@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>35 Poems of John Muconto</title>
+  <style>
+    /* ---------- CSS Variables & Theming ---------- */
+    :root {
+      --bg-body: #1a1e2c;
+      --book-bg: #fcf9f2;
+      --book-text: #1e1e2a;
+      --book-muted: #5f5f6f;
+      --book-border: #d4c9b8;
+      --book-accent: #c9a54b;
+      --book-accent-light: #f5e6b0;
+      --book-heading: #7a6a4a;
+      --book-subtle-bg: #f3efe6;
+      --book-toc-bg: #f9f5ed;
+      --book-toc-border: #e2d8c8;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      --cover-text: #2e2e3e;
+      --poem-title-color: #2e2e3e;
+      --input-bg: #ffffff;
+      --input-border: #d4c9b8;
+      --input-text: #1e1e2a;
+      --input-focus: #c9a54b;
+      --btn-bg: #c9a54b;
+      --btn-text: #ffffff;
+      --btn-hover: #b38f3e;
+
+      --sidebar-bg: #f5f0e6;
+      --sidebar-text: #2e2e3e;
+      --sidebar-muted: #7a6a4a;
+      --sidebar-hover: #e8dfc9;
+      --sidebar-border: #d4c9b8;
+      --sidebar-active-bg: #c9a54b;
+      --sidebar-active-text: #ffffff;
+      --sidebar-width: 260px;
+    }
+
+    body:has(#dark-toggle:checked) {
+      --bg-body: #0b0e17;
+      --book-bg: #1e1e2a;
+      --book-text: #e0dcd0;
+      --book-muted: #a0a0b0;
+      --book-border: #3a3a4a;
+      --book-accent: #d4af5a;
+      --book-accent-light: #f5e6b0;
+      --book-heading: #c9a54b;
+      --book-subtle-bg: #2a2a3a;
+      --book-toc-bg: #252535;
+      --book-toc-border: #3a3a4a;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.9);
+      --cover-text: #d0ccc0;
+      --poem-title-color: #e0dcd0;
+      --input-bg: #2a2a3a;
+      --input-border: #3a3a4a;
+      --input-text: #e0dcd0;
+      --input-focus: #d4af5a;
+      --btn-bg: #d4af5a;
+      --btn-text: #1e1e2a;
+      --btn-hover: #c9a54b;
+
+      --sidebar-bg: #1a1a26;
+      --sidebar-text: #e0dcd0;
+      --sidebar-muted: #c9a54b;
+      --sidebar-hover: #2a2a3a;
+      --sidebar-border: #3a3a4a;
+      --sidebar-active-bg: #d4af5a;
+      --sidebar-active-text: #1e1e2a;
+    }
+
+    /* ---------- Global Reset ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 1.5rem;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      font-family: 'Georgia', 'Times New Roman', Times, serif;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .layout {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #dark-toggle,
+    #sidebar-toggle {
+      display: none;
+    }
+
+    .toggle-label {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.2rem;
+      z-index: 200;
+      background: var(--book-bg);
+      color: var(--book-text);
+      border: 1px solid var(--book-border);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .toggle-label:hover {
+      background: var(--book-subtle-bg);
+    }
+
+    .toggle-label .icon-sun,
+    .toggle-label .icon-moon {
+      display: none;
+    }
+
+    body:not(:has(#dark-toggle:checked)) .toggle-label .icon-moon {
+      display: inline;
+    }
+
+    body:has(#dark-toggle:checked) .toggle-label .icon-sun {
+      display: inline;
+    }
+
+    .sidebar-toggle-label {
+      display: none;
+      position: fixed;
+      top: 1.2rem;
+      left: 1.2rem;
+      z-index: 200;
+      background: var(--book-bg);
+      color: var(--book-text);
+      border: 1px solid var(--book-border);
+      border-radius: 8px;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .sidebar-toggle-label:hover {
+      background: var(--book-subtle-bg);
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 150;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    body:has(#sidebar-toggle:checked) .sidebar-overlay {
+      display: block;
+      opacity: 1;
+    }
+
+    .sidebar {
+      width: var(--sidebar-width);
+      flex-shrink: 0;
+      background-color: var(--sidebar-bg);
+      border: 1px solid var(--sidebar-border);
+      border-radius: 6px;
+      padding: 1.5rem 1.2rem;
+      position: sticky;
+      top: 2rem;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      transition: background-color 0.3s, border-color 0.3s, transform 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      scrollbar-width: thin;
+      scrollbar-color: var(--sidebar-border) transparent;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background-color: var(--sidebar-border);
+      border-radius: 3px;
+    }
+
+    .sidebar h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+      color: var(--sidebar-muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--sidebar-border);
+    }
+
+    .sidebar nav ul {
+      list-style: none;
+    }
+
+    .sidebar nav .part-label {
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.12rem;
+      text-transform: uppercase;
+      color: var(--sidebar-muted);
+      margin-top: 1rem;
+      margin-bottom: 0.4rem;
+      padding-left: 0.6rem;
+      display: block;
+    }
+
+    .sidebar nav .part-label:first-child {
+      margin-top: 0;
+    }
+
+    .sidebar nav a {
+      display: block;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.9rem;
+      color: var(--sidebar-text);
+      text-decoration: none;
+      border-radius: 4px;
+      border-left: 3px solid transparent;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      line-height: 1.4;
+    }
+
+    .sidebar nav a:hover {
+      background-color: var(--sidebar-hover);
+      border-left-color: var(--book-accent);
+    }
+
+    .sidebar nav a.active {
+      background-color: var(--sidebar-active-bg);
+      color: var(--sidebar-active-text);
+      font-weight: 600;
+      border-left-color: var(--book-accent);
+    }
+
+    .book {
+      max-width: 750px;
+      width: 100%;
+      background-color: var(--book-bg);
+      box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 240, 0.05);
+      border-radius: 6px;
+      padding: 3rem 2.8rem;
+      color: var(--book-text);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      min-width: 0;
+    }
+
+    .cover {
+      text-align: center;
+      padding: 1rem 0 2.5rem 0;
+      border-bottom: 2px solid var(--book-border);
+      margin-bottom: 2.5rem;
+    }
+
+    .cover .moon-icon {
+      font-size: 2.5rem;
+      color: var(--book-accent-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .cover .stars {
+      font-size: 2.2rem;
+      letter-spacing: 0.5rem;
+      color: var(--book-accent-light);
+      text-shadow: 0 0 8px var(--book-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .cover h1 {
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: var(--book-accent);
+      letter-spacing: 0.1rem;
+      line-height: 1;
+      margin: 0.5rem 0 0.2rem;
+      font-family: 'Georgia', serif;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .cover .subtitle {
+      font-size: 1.8rem;
+      letter-spacing: 0.4rem;
+      text-transform: uppercase;
+      color: var(--cover-text);
+      margin-top: -0.2rem;
+      font-weight: 400;
+    }
+
+    .cover .author {
+      font-size: 1.3rem;
+      letter-spacing: 0.3rem;
+      text-transform: uppercase;
+      color: var(--book-muted);
+      margin-top: 0.8rem;
+      font-weight: 400;
+      border-top: 1px solid var(--book-accent);
+      display: inline-block;
+      padding-top: 1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .copyright {
+      font-size: 0.85rem;
+      color: var(--book-muted);
+      text-align: center;
+      border-bottom: 1px dashed var(--book-border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .foreword {
+      font-style: italic;
+      background-color: var(--book-subtle-bg);
+      padding: 1.8rem 1.8rem;
+      border-radius: 4px;
+      margin-bottom: 2.5rem;
+      border-left: 4px solid var(--book-accent);
+      font-size: 1.05rem;
+      transition: background-color 0.3s;
+    }
+
+    .foreword p {
+      margin-bottom: 1rem;
+    }
+
+    .foreword p:last-child {
+      margin-bottom: 0;
+      text-align: right;
+      font-style: normal;
+      font-weight: 600;
+      color: var(--book-text);
+    }
+
+    .toc {
+      margin: 2.5rem 0 3rem;
+      background: var(--book-toc-bg);
+      padding: 1.8rem 2rem;
+      border-radius: 4px;
+      border: 1px solid var(--book-toc-border);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .toc h2 {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2rem;
+      color: var(--book-heading);
+      border-bottom: 1px solid var(--book-border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .toc ul {
+      list-style: none;
+      columns: 2;
+      column-gap: 2rem;
+    }
+
+    .toc li {
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+      color: var(--book-text);
+      break-inside: avoid;
+    }
+
+    .toc .part-label {
+      font-weight: 700;
+      color: var(--book-accent);
+      margin-top: 0.8rem;
+      display: block;
+      font-size: 0.85rem;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+      break-inside: avoid;
+    }
+
+    .toc a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .toc a:hover {
+      color: var(--book-accent);
+      border-bottom-color: var(--book-accent);
+    }
+
+    .part {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .part-title {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 0.2rem;
+      text-transform: uppercase;
+      color: var(--book-accent);
+      border-bottom: 2px solid var(--book-border);
+      display: inline-block;
+      padding-bottom: 0.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .poem {
+      margin-bottom: 2.8rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    .poem-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--poem-title-color);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.03rem;
+      border-left: 4px solid var(--book-accent);
+      padding-left: 0.8rem;
+      text-align: left;
+      transition: color 0.3s;
+      scroll-margin-top: 1.5rem;
+    }
+
+    .poem-content {
+      font-size: 1.05rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      line-height: 1.7;
+      color: var(--book-text);
+      padding-left: 0.8rem;
+      border-left: 1px solid transparent;
+      transition: color 0.3s;
+    }
+
+    .about-author {
+      margin-top: 3.5rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--book-border);
+      font-size: 0.98rem;
+      scroll-margin-top: 1.5rem;
+    }
+
+    .about-author h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+      color: var(--book-heading);
+      margin-bottom: 1rem;
+    }
+
+    .about-author p {
+      margin-bottom: 1rem;
+      color: var(--book-text);
+    }
+
+    .feedback-section {
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 2px solid var(--book-border);
+      scroll-margin-top: 1.5rem;
+    }
+
+    .feedback-section h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.15rem;
+      text-transform: uppercase;
+      color: var(--book-heading);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .feedback-section .feedback-subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--book-muted);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      max-width: 550px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.03rem;
+      color: var(--book-text);
+      text-transform: uppercase;
+    }
+
+    .form-group label .required {
+      color: #c0392b;
+      margin-left: 2px;
+    }
+
+    body:has(#dark-toggle:checked) .form-group label .required {
+      color: #e74c3c;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      background-color: var(--input-bg);
+      color: var(--input-text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s, color 0.3s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--input-focus);
+      box-shadow: 0 0 0 3px rgba(201, 165, 75, 0.2);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+      line-height: 1.6;
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235f5f6f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 0.8rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem;
+    }
+
+    body:has(#dark-toggle:checked) .form-group select {
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    }
+
+    .form-submit-btn {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+      padding: 0.9rem 1.5rem;
+      background-color: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      margin-top: 0.5rem;
+      align-self: center;
+      min-width: 200px;
+    }
+
+    .form-submit-btn:hover {
+      background-color: var(--btn-hover);
+    }
+
+    .form-submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--book-muted);
+      text-align: center;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .back-to-top {
+      display: block;
+      text-align: center;
+      margin: 2rem auto 0;
+      font-size: 0.85rem;
+      color: var(--book-muted);
+      text-decoration: none;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .back-to-top:hover {
+      color: var(--book-accent);
+    }
+
+    @media (max-width: 1100px) {
+      :root {
+        --sidebar-width: 220px;
+      }
+      .sidebar {
+        padding: 1.2rem 1rem;
+      }
+      .sidebar nav a {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.5rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      body {
+        padding: 1rem 0.75rem;
+      }
+
+      .layout {
+        gap: 0;
+      }
+
+      .sidebar-toggle-label {
+        display: flex;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        max-height: 100vh;
+        width: 280px;
+        max-width: 85vw;
+        border-radius: 0 8px 8px 0;
+        border-left: none;
+        z-index: 160;
+        transform: translateX(-100%);
+        padding-top: 4.5rem;
+        overflow-y: auto;
+      }
+
+      body:has(#sidebar-toggle:checked) .sidebar {
+        transform: translateX(0);
+      }
+
+      .book {
+        padding: 2.5rem 1.8rem;
+      }
+
+      .cover {
+        padding-top: 2.5rem;
+      }
+
+      .cover h1 {
+        font-size: 3.5rem;
+      }
+
+      .toc ul {
+        columns: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .book {
+        padding: 2rem 1.4rem;
+      }
+      .cover {
+        padding-top: 2rem;
+      }
+      .cover h1 {
+        font-size: 3rem;
+      }
+      .cover .subtitle {
+        font-size: 1.3rem;
+        letter-spacing: 0.2rem;
+      }
+      .cover .author {
+        font-size: 1rem;
+      }
+      .poem-content {
+        font-size: 0.98rem;
+      }
+      .part-title {
+        font-size: 1.6rem;
+      }
+      .toggle-label,
+      .sidebar-toggle-label {
+        top: 0.8rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      .toggle-label {
+        right: 0.8rem;
+      }
+      .sidebar-toggle-label {
+        left: 0.8rem;
+      }
+      .feedback-form {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 400px) {
+      body {
+        padding: 0.5rem;
+      }
+      .book {
+        padding: 1.5rem 1rem;
+        border-radius: 4px;
+      }
+      .cover {
+        padding-top: 2.2rem;
+      }
+      .cover h1 {
+        font-size: 2.6rem;
+      }
+      .cover .subtitle {
+        font-size: 1.1rem;
+        letter-spacing: 0.15rem;
+      }
+      .cover .author {
+        font-size: 0.85rem;
+        letter-spacing: 0.2rem;
+      }
+      .poem-title {
+        font-size: 1.1rem;
+      }
+      .poem-content {
+        font-size: 0.9rem;
+        padding-left: 0.5rem;
+      }
+      .foreword {
+        padding: 1rem;
+        font-size: 0.95rem;
+      }
+      .toc {
+        padding: 1rem 1.2rem;
+      }
+      .toc h2 {
+        font-size: 1.2rem;
+      }
+      .toggle-label,
+      .sidebar-toggle-label {
+        top: 0.6rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      .toggle-label {
+        right: 0.6rem;
+      }
+      .sidebar-toggle-label {
+        left: 0.6rem;
+      }
+      .form-submit-btn {
+        width: 100%;
+        min-width: unset;
+      }
+      .sidebar {
+        width: 260px;
+        padding-top: 4rem;
+      }
+    }
+
+    body:has(#dark-toggle:checked) .poem-content,
+    body:has(#dark-toggle:checked) .foreword,
+    body:has(#dark-toggle:checked) .toc li,
+    body:has(#dark-toggle:checked) .about-author p {
+      color: var(--book-text);
+    }
+
+    .book,
+    .foreword,
+    .toc,
+    .poem-content,
+    .poem-title,
+    .cover .subtitle,
+    .cover .author,
+    .about-author p,
+    .copyright,
+    .form-group input,
+    .form-group textarea,
+    .form-group select,
+    .form-submit-btn,
+    .sidebar {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      * {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <input type="checkbox" id="dark-toggle" aria-label="Toggle dark mode">
+  <input type="checkbox" id="sidebar-toggle" aria-label="Toggle sidebar">
+
+  <label for="sidebar-toggle" class="sidebar-overlay" aria-hidden="true"></label>
+
+  <label for="dark-toggle" class="toggle-label" role="button" aria-pressed="false" title="Toggle dark mode">
+    <span class="icon-moon" aria-hidden="true">🌙</span>
+    <span class="icon-sun" aria-hidden="true">☀️</span>
+  </label>
+
+  <label for="sidebar-toggle" class="sidebar-toggle-label" role="button" aria-pressed="false" title="Toggle index">
+    <span aria-hidden="true">☰</span>
+  </label>
+
+  <div class="layout">
+
+    <aside class="sidebar" id="top">
+      <h3>Index</h3>
+      <nav aria-label="Table of contents">
+        <ul>
+          <li><a href="#cover">Cover</a></li>
+          <li><a href="#foreword">Foreword</a></li>
+          <li><a href="#toc">Contents</a></li>
+
+          <li class="part-label">Part I – Formation</li>
+          <li><a href="#live">Live</a></li>
+          <li><a href="#dear-devil">Dear Devil</a></li>
+          <li><a href="#adulthood">Adulthood</a></li>
+          <li><a href="#dear-god">Dear God</a></li>
+          <li><a href="#onions">Onions</a></li>
+          <li><a href="#mindfulness">Mindfulness</a></li>
+          <li><a href="#spiderman-toy">Spiderman Toy</a></li>
+          <li><a href="#without-you">Without You</a></li>
+          <li><a href="#growing-up">Growing Up</a></li>
+
+          <li class="part-label">Part II – Struggle</li>
+          <li><a href="#programmers-code">Programmer's Code</a></li>
+          <li><a href="#am-i-a-fool">Am I a Fool (Love)</a></li>
+          <li><a href="#pain">Pain</a></li>
+          <li><a href="#erica">Erica</a></li>
+          <li><a href="#startup-paradigm">Startup Paradigm</a></li>
+          <li><a href="#winner">Winner</a></li>
+          <li><a href="#school">School</a></li>
+          <li><a href="#fuck">Fuck</a></li>
+
+          <li class="part-label">Part III – Release</li>
+          <li><a href="#letting-go">Letting Go</a></li>
+          <li><a href="#parents">Parents</a></li>
+          <li><a href="#poem">Poem</a></li>
+          <li><a href="#beer">Beer</a></li>
+          <li><a href="#nights">Nights</a></li>
+          <li><a href="#in-a-bad-day">In a Bad Day</a></li>
+          <li><a href="#sex">Sex</a></li>
+          <li><a href="#babel-tower">Babel Tower</a></li>
+          <li><a href="#joy-of-others">Joy of Others</a></li>
+          <li><a href="#life-is-hard">Life Is Hard</a></li>
+
+          <li class="part-label">Part IV – Observation</li>
+          <li><a href="#5am">5 AM</a></li>
+          <li><a href="#social-media">Social Media Adventure</a></li>
+          <li><a href="#night-sky">Night Sky</a></li>
+          <li><a href="#johrei">Johrei</a></li>
+
+          <li class="part-label">Part V – Resolution</li>
+          <li><a href="#milestones">Milestones of Life</a></li>
+          <li><a href="#three-gifts">Three Gifts</a></li>
+          <li><a href="#peace">Peace</a></li>
+          <li><a href="#35">35</a></li>
+
+          <li class="part-label">More</li>
+          <li><a href="#about-author">About the Author</a></li>
+          <li><a href="#feedback">Feedback</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div class="book">
+      <div class="cover" id="cover">
+        <div class="moon-icon">☾</div>
+        <div class="stars">✧ ✦ ✧</div>
+        <h1>35</h1>
+        <div class="subtitle">Poems</div>
+        <div class="author">of<br>John Muconto</div>
+      </div>
+
+      <div class="copyright">
+        <p>© 2026 John Muconto</p>
+        <p>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</p>
+        <p>You are free to share, copy, redistribute, provided proper credit is given and the work is not used commercially.</p>
+        <p>License details: Creative Commons BY-NC 4.0</p>
+      </div>
+
+      <div class="foreword" id="foreword">
+        <p><strong>FOREWORD</strong></p>
+        <p>this collection began as a gift to myself—something I wanted to complete before turning 35.</p>
+        <p>it became a way of gathering fragments of a life lived: memories, reflections, contradictions, and moments of clarity.</p>
+        <p>not as an attempt to find answers, and not as a search for closure, but as a record of experience as it is.</p>
+        <p>these poems do not aim to explain life, but to observe it—honestly, imperfectly, and personally.</p>
+        <p>at 35, I do not claim resolution. only awareness.</p>
+      </div>
+
+      <div class="toc" id="toc">
+        <h2>Contents</h2>
+        <ul>
+          <li class="part-label">Part I – Formation</li>
+          <li><a href="#live">Live</a></li>
+          <li><a href="#dear-devil">Dear Devil</a></li>
+          <li><a href="#adulthood">Adulthood</a></li>
+          <li><a href="#dear-god">Dear God</a></li>
+          <li><a href="#onions">Onions</a></li>
+          <li><a href="#mindfulness">Mindfulness</a></li>
+          <li><a href="#spiderman-toy">Spiderman Toy</a></li>
+          <li><a href="#without-you">Without You</a></li>
+          <li><a href="#growing-up">Growing Up</a></li>
+          <li class="part-label">Part II – Struggle</li>
+          <li><a href="#programmers-code">Programmer's Code</a></li>
+          <li><a href="#am-i-a-fool">Am I a Fool (Love)</a></li>
+          <li><a href="#pain">Pain</a></li>
+          <li><a href="#erica">Erica</a></li>
+          <li><a href="#startup-paradigm">Startup Paradigm</a></li>
+          <li><a href="#winner">Winner</a></li>
+          <li><a href="#school">School</a></li>
+          <li><a href="#fuck">Fuck</a></li>
+          <li class="part-label">Part III – Release</li>
+          <li><a href="#letting-go">Letting Go</a></li>
+          <li><a href="#parents">Parents</a></li>
+          <li><a href="#poem">Poem</a></li>
+          <li><a href="#beer">Beer</a></li>
+          <li><a href="#nights">Nights</a></li>
+          <li><a href="#in-a-bad-day">In a Bad Day</a></li>
+          <li><a href="#sex">Sex</a></li>
+          <li><a href="#babel-tower">Babel Tower</a></li>
+          <li><a href="#joy-of-others">Joy of Others</a></li>
+          <li><a href="#life-is-hard">Life Is Hard</a></li>
+          <li class="part-label">Part IV – Observation</li>
+          <li><a href="#5am">5 AM</a></li>
+          <li><a href="#social-media">Social Media Adventure</a></li>
+          <li><a href="#night-sky">Night Sky</a></li>
+          <li><a href="#johrei">Johrei</a></li>
+          <li class="part-label">Part V – Resolution</li>
+          <li><a href="#milestones">Milestones of Life</a></li>
+          <li><a href="#three-gifts">Three Gifts</a></li>
+          <li><a href="#peace">Peace</a></li>
+          <li><a href="#35">35</a></li>
+        </ul>
+      </div>
+
+      <!-- PART I - FORMATION -->
+      <div class="part">
+        <div class="part-title">Formation</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="live">Live</div>
+        <div class="poem-content">Live today
+Like the first,
+like the last day of your life
+
+with the wonder
+of a child discovering
+the world,
+and the gaze of an elder
+reminiscing on old days
+
+Live today—
+it may be the first,
+it will be the last
+
+Every day, life begins
+where life ends:
+a circle of life</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="dear-devil">Dear Devil</div>
+        <div class="poem-content">I am sorry
+
+for every time  I blamed you
+
+for the wrongs in the world and in my life
+
+for my own mistakes, my own sins
+
+even when I knew exactly what I was doing</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="adulthood">Adulthood</div>
+        <div class="poem-content">When life moves too fast
+and everything happens at once,
+
+a slow day at home—
+waking up late,
+a cup of coffee—
+
+is all you ask for
+
+and then you know:
+you are an adult</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="dear-god">Dear God</div>
+        <div class="poem-content">Thank you for everything—
+
+the good and the bad, blessings and trials
+
+I am too immature to fully understand your wisdom and your love
+
+When perfection embraces imperfection, there is true love
+
+I am here for you, as you have always been for us</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="onions">Onions</div>
+        <div class="poem-content">I don't like onions—
+
+why, I can't say
+
+the taste, the smell, I can't take it
+
+I don't like onions, and neither do my father and my brother—
+
+something we share without knowing why</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="mindfulness">Mindfulness</div>
+        <div class="poem-content">The mind wanders through memories
+
+and plans—
+
+never here, always in the past or the future
+
+The mind wanders, never stops— thoughts running even in sleep
+
+a tired mind
+
+Take a deep breath, notice what is here—
+
+this moment is enough</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="spiderman-toy">Spiderman Toy</div>
+        <div class="poem-content">I wanted a Spiderman action figure, like the ones you see in commercials
+
+I asked my mother for one but she brought me another
+
+I was sad— it was not the one I wanted
+
+but now I understand— she did her best
+
+she did not know Spiderman as much as I did
+
+it wasn't because she didn't want to
+
+memories like this make me appreciate my mother and what I had</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="without-you">Without You</div>
+        <div class="poem-content">Silence screams
+in the space you left—
+
+louder
+than any noise
+
+I miss you</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="growing-up">Growing Up</div>
+        <div class="poem-content">Until 10,
+I wanted things
+
+until 20,
+I wanted friends
+
+until 30,
+I wanted happiness
+
+as I grow toward 40,
+I want peace of mind
+
+as I grew, I got what I wanted—
+and still reached for something deeper
+
+in my journey through life,
+I am no longer chasing—
+only understanding</div>
+      </div>
+
+      <!-- PART II - STRUGGLE -->
+      <div class="part">
+        <div class="part-title">Struggle</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="programmers-code">Programmer's Code</div>
+        <div class="poem-content">Between classes and objects,
+organize your code
+
+don't repeat yourself,
+write readable code
+
+know when to use
+enums and interfaces
+
+so much complexity—
+maybe I should go functional
+
+clean code or not,
+it just needs to work
+
+because if I come back in six months,
+I need to find
+that damn method</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="am-i-a-fool">Am I a Fool (Love)</div>
+        <div class="poem-content">I believe in love
+
+Am I a fool, to believe in love when the world sees you as a tool
+
+Am I a fool, to believe in love
+
+when money, pleasure, and ego run the world
+
+Am I a fool, to believe in love when everyone feels unlove
+
+Am I a fool, to believe in love I can't, I won't let love die
+
+I believe in love
+
+to love and be loved— no better feeling
+
+I believe in love only love can unite us</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="pain">Pain</div>
+        <div class="poem-content">I feel your pain
+you are not alone
+I have been there before
+
+hopeless,
+in a pool of tears and sorrow
+
+no matter what you are going through,
+you will survive it
+you are stronger than it
+
+I have been there
+and I survived it
+
+there is no pain we cannot endure
+and overcome
+
+together we are stronger
+it is okay to ask for help</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="erica">Erica</div>
+        <div class="poem-content">Since our first date,
+I knew you were the one
+
+five years later,
+you are still the one
+
+I love you—
+deeply,
+more than before</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="startup-paradigm">Startup Paradigm</div>
+        <div class="poem-content">They say
+to build a startup,
+find a problem,
+create a solution,
+
+find people willing to pay,
+and make the world
+a better place
+
+But what can I do
+when the problem
+I want to solve
+is putting money
+in my pocket
+
+and escaping
+the nine to five—
+
+is that a problem
+worth solving?</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="winner">Winner</div>
+        <div class="poem-content">I lost and I won
+
+I lost more
+
+than I can admit
+
+you could say I am a winner at losing
+
+the few times I won were because of my losses
+
+I lost so much I had nothing to lose
+
+I lost the fear of failing</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="school">School</div>
+        <div class="poem-content">Not much to reminisce about school—
+
+except colleagues
+
+and some teachers
+
+on those hot days, the only thing I cared about was getting good grades</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="fuck">Fuck</div>
+        <div class="poem-content">so much power in a four- letter word
+
+a word that plays
+
+well with any other word in any mood
+
+embarrassed to say, it is my favorite little word
+
+in the English language</div>
+      </div>
+
+      <!-- PART III - RELEASE -->
+      <div class="part">
+        <div class="part-title">Release</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="letting-go">Letting Go</div>
+        <div class="poem-content">From memories, feelings, dreams, people—
+
+and everything else that belonged to who I was in that moment letting go to move, to grow, to succeed
+
+letting go to lose control letting go and leave it in God's hands
+
+letting go of myself— for something greater</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="parents">Parents</div>
+        <div class="poem-content">I know
+all you did,
+all you could,
+all you knew—
+for me
+
+I love you
+very much</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="poem">Poem</div>
+        <div class="poem-content">I am not a poet,
+but something in me is
+
+my heart speaks in poems,
+things even I am not aware of
+
+the language of poets
+lets me find a part of me so deep
+it is only revealed through verse</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="beer">Beer</div>
+        <div class="poem-content">that first sip was awful, until it became part of everything
+
+in social moments, it made everything easier—
+
+until it didn't
+
+I remember those days, when nothing needed to be made special hangovers were tough, we broke up so many times as I grow, I don't need you— but the bitter taste turned sweet
+
+I still take a sip every now and then</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="nights">Nights</div>
+        <div class="poem-content">quiet night, mind clears
+
+like a clear sky with a full moon
+
+good ideas come when everyone is gone
+
+to think, to study,  or just listen  to bossa nova  sleep leaves me alone  with myself  and returns  with the sunrise  my best sleep  is during the day</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="in-a-bad-day">In a Bad Day</div>
+        <div class="poem-content">on a bad day, sitting on the stairs, an old man out of nowhere greets me warmly
+
+I forget why I was even mad
+
+as I think back to that moment, the cause and the old man become mere fogs
+
+but the feeling remains vivid, like a blue sky on a summer day
+
+1 still feel connected to each one</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="sex">Sex</div>
+        <div class="poem-content">[This poem appears to be missing or not included in the manuscript.]</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="babel-tower">Babel Tower</div>
+        <div class="poem-content">As humans, the only time we were truly united was when we built the tower to become legends
+
+with all His power, divided by verb
+
+ever since, families, empires, and countries were born—through illusory lines that never truly existed
+
+we achieve so much on our own, and yet we reach our limits
+
+if we are to survive, we need to unite once again
+
+1
+
+to reach ourselves</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="joy-of-others">Joy of Others</div>
+        <div class="poem-content">that joy that comes from within
+
+when you help somebody and see a smile on their face
+
+makes me feel holy</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="life-is-hard">Life Is Hard</div>
+        <div class="poem-content">life is hard, the world is harsh
+
+for most, it is more surviving than living
+
+we hold on to little sparks of hope to endure the day
+
+you don't know where it comes from—prayer, a game, or social media
+
+a smile or a hug</div>
+      </div>
+
+      <!-- PART IV - OBSERVATION -->
+      <div class="part">
+        <div class="part-title">Observation</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="5am">5 AM</div>
+        <div class="poem-content">as the sun rises, birds sing
+
+midnight silence fades away
+
+a new day begins
+
+after all these years, it is still easier to go to sleep than to wake up at 5 AM</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="social-media">Social Media Adventure</div>
+        <div class="poem-content">started on MySpace tasted Badoo never a Twitter man
+
+dated with Facebook while cheating with Instagram
+
+private on WhatsApp but hiding on Reddit
+
+between reels and shorts, when I want an unsocial distraction
+
+YouTube for dinner no TikTok for me— I've seen enough</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="night-sky">Night Sky</div>
+        <div class="poem-content">when I look at the sky full of stars and the moon
+
+I feel the immensity of the universe in a single moment
+
+one single star touches my heart with light each night
+
+until I learned it was Venus</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="johrei">Johrei</div>
+        <div class="poem-content">the light that saved my life even after 22 years
+
+with humility, I sometimes feel unworthy to channel God's love
+
+I ask for permission and lift my hand for the person next to me
+
+and in that moment I feel closer to God</div>
+      </div>
+
+      <!-- PART V - RESOLUTION -->
+      <div class="part">
+        <div class="part-title">Resolution</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="milestones">Milestones of Life</div>
+        <div class="poem-content">In life there are moments we cannot go back from
+
+milestones that mark our lives for better or worse
+
+that shape our growth
+
+for me, what comes to mind:
+
+the decision to let go and move on the decision to follow God's will rather than my own
+
+the decision to marry the one I love the decision to become a father to my child
+
+the decision to follow my dreams</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="three-gifts">Three Gifts</div>
+        <div class="poem-content">before birth, wherever we stay before coming into this world, three gifts are given to each of us
+
+a talent, a sin, and a challenge
+
+the talent- something only you can do in your own way
+
+the sin- one of the seven that follows you through life
+
+the challenge— something you must conquer each day, knowing it will never be easy
+
+three gifts that make every life unequal, special, human that is life in a nutshell</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="peace">Peace</div>
+        <div class="poem-content">during this life I searched for it all—
+
+happiness in people, things, and success
+
+love in people, in things, and in myself
+
+through suffering, endurance, and gratitude, I found all I needed out of life
+
+enough for a life well lived</div>
+      </div>
+
+      <div class="poem">
+        <div class="poem-title" id="35">35</div>
+        <div class="poem-content">A sum of a life a sum of personas a sum of experiences— good and bad
+
+a world of self, and many I had the pleasure to meet
+
+boy becomes man, and man finds in the boy a home, an essence, the root of all he became
+
+dreams fulfilled, forgotten, and undone
+
+a marathon, not a race
+
+35 is not the end, but a checkpoint in a game without retries
+
+regrets and mistakes accepted failures owned
+
+with gratitude, I danced with my demons until they dissolved
+
+by God
+
+I am here—blessed with love and pride
+
+a life well lived</div>
+      </div>
+
+      <div class="about-author" id="about-author">
+        <h2>About the Author</h2>
+        <p>John Muconto is a programmer and writer from Mozambique with professional experience in IT management and a parallel academic background in theology. His work sits at the intersection of analytical systems thinking and reflective spiritual inquiry.</p>
+        <p>He has practiced the Messianic faith for 22 years, a perspective that informs much of his worldview and writing.</p>
+        <p>His poetry collection, <em>35 Poems</em>, reflects structured introspection, personal observation, and thematic exploration of meaning, discipline, and belief.</p>
+        <p>The work is published under a free license, reflecting his interest in open access and shared creative work.</p>
+      </div>
+
+      <div class="feedback-section" id="feedback">
+        <h2>Feedback</h2>
+        <p class="feedback-subtitle">I would love to hear your thoughts on these poems.</p>
+
+        <form class="feedback-form"
+              action="mailto:j.muconto@gmail.com"
+              method="post"
+              enctype="text/plain">
+          <div class="form-group">
+            <label for="name">Your Name <span class="required">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Your Email <span class="required">*</span></label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" name="subject">
+              <option value="General Feedback">General Feedback</option>
+              <option value="Thoughts on a Poem">Thoughts on a Poem</option>
+              <option value="Correction or Typo">Correction or Typo</option>
+              <option value="Translation Request">Translation Request</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Message <span class="required">*</span></label>
+            <textarea id="message" name="message" placeholder="Write your feedback here..." required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit-btn">Send Feedback</button>
+          <p class="form-note">This will open your email app with the message pre-filled.</p>
+        </form>
+
+        <a href="#top" class="back-to-top">↑ Back to Top</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var sidebar = document.querySelector('.sidebar');
+      var sidebarLinks = sidebar ? Array.prototype.slice.call(sidebar.querySelectorAll('a[href^="#"]')) : [];
+      if (!sidebarLinks.length) return;
+
+      var linkById = {};
+      sidebarLinks.forEach(function (link) {
+        var id = link.getAttribute('href').slice(1);
+        if (id) linkById[id] = link;
+      });
+
+      var targets = Object.keys(linkById)
+        .map(function (id) { return document.getElementById(id); })
+        .filter(Boolean);
+
+      if (!targets.length) return;
+
+      var currentActive = null;
+
+      function setActive(link) {
+        if (currentActive === link) return;
+        if (currentActive) currentActive.classList.remove('active');
+        if (link) {
+          link.classList.add('active');
+          var linkTop = link.offsetTop;
+          var linkBottom = linkTop + link.offsetHeight;
+          var sidebarTop = sidebar.scrollTop;
+          var sidebarBottom = sidebarTop + sidebar.clientHeight;
+          if (linkTop < sidebarTop + 20) {
+            sidebar.scrollTop = linkTop - 20;
+          } else if (linkBottom > sidebarBottom - 20) {
+            sidebar.scrollTop = linkBottom - sidebar.clientHeight + 20;
+          }
+        }
+        currentActive = link;
+      }
+
+      function updateActive() {
+        var offsetLine = window.scrollY + 120;
+        var bestLink = null;
+        var bestTop = -Infinity;
+
+        targets.forEach(function (el) {
+          var top = el.getBoundingClientRect().top + window.scrollY;
+          if (top <= offsetLine && top > bestTop) {
+            bestTop = top;
+            bestLink = linkById[el.id];
+          }
+        });
+
+        if (!bestLink) {
+          setActive(null);
+        } else {
+          setActive(bestLink);
+        }
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          updateActive();
+          ticking = false;
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      updateActive();
+
+      var sidebarToggle = document.getElementById('sidebar-toggle');
+      sidebarLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          if (sidebarToggle && sidebarToggle.checked) {
+            sidebarToggle.checked = false;
+          }
+        });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sidebarToggle && sidebarToggle.checked) {
+          sidebarToggle.checked = false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
